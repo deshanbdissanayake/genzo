@@ -15,8 +15,8 @@ import {
 import { FontAwesome5, Ionicons } from 'react-native-vector-icons'; 
 
 // Import your screens or components
-import HomeScreen from '../screens/HomeScreen';
 import { colors } from '../assets/colors/colors';
+import HomeNav from './HomeNav';
 
 const Drawer = createDrawerNavigator();
 
@@ -76,7 +76,7 @@ const CustomDrawerContent = ({ navigation, state, descriptors }) => {
       <View style={styles.drawerBottomWrapper}>
         <DrawerItem
           label="Logout"
-          labelStyle={{color: colors.textColorSec}}
+          labelStyle={{color: colors.textColorSec, fontFamily: 'ms-regular'}}
           onPress={handleLogoutClick}
           icon={({ size }) => (
             <Ionicons name="log-out-outline" size={size} color={colors.textColorSec} />
@@ -100,10 +100,11 @@ const DraverNav = () => {
       }}
     >
       <Drawer.Screen
-        name="Dash"
-        component={HomeScreen}
+        name="Home"
+        component={HomeNav}
         options={{
           drawerLabel: 'Home',
+          drawerLabelStyle: { fontFamily: 'ms-regular' },
           drawerIcon: ({ focused, color, size }) => (
             <Ionicons
               name={focused ? 'home' : 'home-outline'}
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   profileText:{
-    fontWeight: 'bold',
+    fontFamily: 'ms-bold',
     fontSize: 18,
     color: colors.textColorSec,
     textAlign: 'center',
@@ -163,6 +164,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.textColorSec,
     textAlign: 'center',
+    fontFamily: 'ms-regular',
   },
   drawerClose:{
     position: 'absolute',
