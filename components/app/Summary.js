@@ -3,32 +3,31 @@ import React, { useCallback, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import LoadingScreen from '../../screens/LoadingScreen'
 import { colors } from '../../assets/colors/colors'
+import { getSummaryByUserId } from '../../assets/data/summary'
 
-const ProvSumCard = ({name, value, bgColor}) => {
+const ProvSumCard = ({name, count,  value, bgColor}) => {
     return (
       <View style={[styles.cardWrapper, {backgroundColor: bgColor}]}>
         <Text style={styles.cardNameStyles}>{name}</Text>
-        <Text style={styles.cardValueStyles}>{value}</Text>
+        <View style={styles.cardValueWrapper}>
+          <Text style={styles.cardCountStyles}>{count} | </Text>
+          <Text style={styles.cardValueStyles}>{value}</Text>
+        </View>
       </View>
     )
 }
 
-const Summary = () => {
+const Summary = ({ filter }) => {
 
   const [loading, setLoading] = useState(true);
-  const [earningsData, setEarningsData] = useState({
-      withdrawable_amount: 0,
-      pending_earnings: 0,
-      total_amount: 0,
-      this_month_earnings: 0,
-      avg_job_price: 0,
-      active_jobs: 0,
-  });
+  const [summaryData, setSummaryData] = useState(null);
 
   const getData = async () => {
     try {
-      //let res = await getEarningsByUserId();
-      //setEarningsData(res);
+      let res = await getSummaryByUserId();
+      if(res){
+        setSummaryData(res);
+      }
     } catch (error) {
       console.error('error at getting earnings data: ', error)
     } finally {
@@ -49,16 +48,15 @@ const Summary = () => {
   return (
     <View style={styles.container}>
       <View style={styles.rowWrapper}>
-        <ProvSumCard name={'Withdrawable Amount'} value={'LKR ' + earningsData.withdrawable_amount} bgColor={'#344955'} />
-        <ProvSumCard name={'Pending Earnings'} value={'LKR ' + earningsData.pending_earnings} bgColor={'#31363F'} />
+        <ProvSumCard name={'Total Orders'} count={summaryData[filter].total.count} value={'LKR ' + summaryData[filter].total.value} bgColor={'#344955'} />
+        <ProvSumCard name={'Pending Orders'} count={summaryData[filter].pending.count} value={'LKR ' + summaryData[filter].pending.value} bgColor={'#31363F'} />
       </View>
       <View style={styles.rowWrapper}>
-        <ProvSumCard name={'Total Balance'} value={'LKR ' + earningsData.total_amount} bgColor={'#333A73'} />
-        <ProvSumCard name={'This Month Earnings'} value={'LKR ' + earningsData.this_month_earnings} bgColor={'#BE7B72'} />
+        <ProvSumCard name={'Shipped'} count={summaryData[filter].shipped.count} value={'LKR ' + summaryData[filter].shipped.value} bgColor={'#333A73'} />
+        <ProvSumCard name={'Returned'} count={summaryData[filter].returned.count} value={'LKR ' + summaryData[filter].returned.value} bgColor={'#9B3922'} />
       </View>
       <View style={styles.rowWrapper}>
-        <ProvSumCard name={'Avg Job Price'} value={'LKR ' + earningsData.avg_job_price} bgColor={'#9B3922'} />
-        <ProvSumCard name={'Active Jobs'} value={earningsData.active_jobs} bgColor={'#704264'} />
+        <ProvSumCard name={'Delivered'} count={summaryData[filter].delivered.count} value={'LKR ' + summaryData[filter].delivered.value} bgColor={'#BE7B72'} />
       </View>
     </View>
   )
@@ -79,13 +77,22 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 5,
-    flex: 1,
+    width: '49%'
   },
   cardNameStyles: {
     color: colors.textColorSec,
     fontSize: 12,
     fontWeight: '300',
     fontFamily: 'ms-regular',
+  },
+  cardValueWrapper: {
+    flexDirection: 'row',
+  },
+  cardCountStyles: {
+    color: colors.textColorSec,
+    fontSize: 14,
+    fontWeight: '400',
+    fontFamily: 'ms-semibold',
   },
   cardValueStyles: {
     color: colors.textColorSec,

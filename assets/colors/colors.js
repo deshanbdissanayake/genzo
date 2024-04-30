@@ -21,10 +21,15 @@ const colorsLight = {
 
     transparentDark: 'rgba(0, 0, 0, 0.5)',
 
-    success : '#406b42',
+    success : '#20a840',
     danger : '#d43b24',
     warning : '#db913b',
     info : '#3b70db',
+
+    successLight : '#6ac47f',
+    dangerLight : '#ffe8e8',
+    warningLight : '#fffae8',
+    infoLight : '#e8f1ff',
 
     bgGold: '#fff9e2',
     bgSilver: '#cccccc',
@@ -40,14 +45,6 @@ const colorsLight = {
     borderGrayLight : '#bbb',
     borderGrayDark : '#2b2b2b',
     borderGrayExtraLight : '#ddd',
-
-    
-
-    successLight : '#e8ffe9',
-    dangerLight : '#ffe8e8',
-    warningLight : '#fffae8',
-    infoLight : '#e8f1ff',
-    
     
     lightGreen: '#06c212',
     lightBlue: '#87abc7',
@@ -80,10 +77,15 @@ const colorsDark = {
 
   transparentDark: 'rgba(0, 0, 0, 0.5)',
 
-  success : '#406b42',
+  success : '#20a840',
   danger : '#d43b24',
   warning : '#db913b',
   info : '#3b70db',
+
+  successLight : '#6ac47f',
+  dangerLight : '#ffe8e8',
+  warningLight : '#fffae8',
+  infoLight : '#e8f1ff',
 
   bgGold: '#fff9e2',
   bgSilver: '#cccccc',
