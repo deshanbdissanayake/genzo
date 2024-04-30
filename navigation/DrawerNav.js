@@ -17,11 +17,16 @@ import { FontAwesome5, Ionicons } from 'react-native-vector-icons';
 // Import your screens or components
 import { colors } from '../assets/colors/colors';
 import HomeNav from './HomeNav';
+import { useAppContext } from '../context/AppContext';
+import { logOut } from '../assets/data/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Drawer = createDrawerNavigator();
 
 // Custom drawer content component
 const CustomDrawerContent = ({ navigation, state, descriptors }) => {
+
+  const { setIsLoggedIn } = useAppContext();
 
   const closeDrawer = () => {
     navigation.closeDrawer();
@@ -39,13 +44,16 @@ const CustomDrawerContent = ({ navigation, state, descriptors }) => {
         {
           text: 'Logout',
           style: 'destructive',
-          onPress: async () => {
-            console.log('logout');
-          },
+          onPress: async () => handleLogoutFunc(),
         },
       ]
     );
   };
+
+  const handleLogoutFunc = async () => {
+    AsyncStorage.clear();
+    setIsLoggedIn(false);
+  }
 
   return (
     <DrawerContentScrollView

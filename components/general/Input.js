@@ -57,8 +57,9 @@ const styles = StyleSheet.create({
     },
     inputTextStyles: {
         fontSize: 14,
-        color: colors.textColorSec,
+        color: colors.textColorPri,
         marginLeft: 10,
         width: '100%',
+        fontFamily: 'ms-regular',
     },
 });

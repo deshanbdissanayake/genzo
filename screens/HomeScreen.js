@@ -14,7 +14,7 @@ import CustomModal from '../components/general/CustomModal';
 const HomeScreen = () => {
 
   const [summaryFilter, setSummaryFilter] = useState('today');
-  const [showFilter, setShowFilter] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
 
   const handleFilter = (filter) => {
     setSummaryFilter(filter);
