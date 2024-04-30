@@ -35,23 +35,6 @@ const colorsLight = {
     bgSilver: '#cccccc',
     bgBronze: '#ffe6cc',
 
-    
-    primaryDark : '#910c3e', //dark pink
-
-    secondary : '#0F52BA', //blue
-    secondaryDark : '#082c63', //dark blue
-    secondaryLight : '#E9ECF5', // light blue
-
-    borderGrayLight : '#bbb',
-    borderGrayDark : '#2b2b2b',
-    borderGrayExtraLight : '#ddd',
-    
-    lightGreen: '#06c212',
-    lightBlue: '#87abc7',
-    lightRed: '#db583d',
-    lightGray: '#f0ebed',
-
-    
 }
 
 const colorsDark = {

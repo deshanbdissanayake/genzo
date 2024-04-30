@@ -26,7 +26,7 @@ const WelcomeScreen = () => {
       <View style={styles.btnWrapper}>
         <Button
           bgColor={colors.bgColorSec}
-          content={<Text style={{ color: colors.textColorSec }}>Let's Go!</Text>}
+          content={<Text style={{ color: colors.textColorSec, fontFamily: 'ms-regular' }}>Let's Go!</Text>}
           func={handleNextClick}
         />
       </View>
