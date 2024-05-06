@@ -9,16 +9,38 @@ import Commission from '../components/app/Commission';
 import MiniButton from '../components/general/MiniButton';
 import Select from '../components/general/Select';
 import CustomModal from '../components/general/CustomModal';
+import CompanyCommission from '../components/app/CompanyCommission';
 
 
 const HomeScreen = () => {
 
-  const [summaryFilter, setSummaryFilter] = useState('today');
-  const [showFilter, setShowFilter] = useState(false);
+  const summaryFilterOptions = [
+    {label: 'Today', value: 'today'},
+    {label: 'This Week', value: 'this_week'},
+    {label: 'This Month', value: 'this_month'},
+    {label: 'This Month First Half', value: 'this_month_first_half'},
+    {label: 'This Month Second Half', value: 'this_month_second_half'},
+  ];
 
-  const handleFilter = (filter) => {
+  const companyCommissionFilterOptions = [
+    {label: 'This Month', value: 'this_month'},
+    {label: 'Last Month', value: 'last_month'},
+  ];
+
+  const [summaryFilter, setSummaryFilter] = useState('today');
+  const [companyCommissionFilter, setCompanyCommissionFilter] = useState('this_month');
+
+  const [showSummaryFilter, setShowSummaryFilter] = useState(false);
+  const [showCompanyCommissionFilter, setShowCompanyCommissionFilter] = useState(false);
+
+  const handleSummaryFilter = (filter) => {
     setSummaryFilter(filter);
-    setShowFilter(false);
+    setShowSummaryFilter(false);
+  }
+
+  const handleCompanyCommissionFilter = (filter) => {
+    setCompanyCommissionFilter(filter);
+    setShowCompanyCommissionFilter(false);
   }
 
   return (
@@ -26,38 +48,61 @@ const HomeScreen = () => {
         <HomeHeader/>
         <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
           <View style={styles.cardSecWrapper}>
-              <Subtitle text={'Summary'} component={
-                <MiniButton
-                  content={<Feather name="more-vertical" size={18} color={colors.textColorPri} />}
-                  func={() => setShowFilter(true)}
-                />
-              } />
+              <Subtitle 
+                text={'Summary'} 
+                subText={(summaryFilterOptions.find(option => option.value === summaryFilter)).label}
+                component={
+                  <MiniButton
+                    content={<Feather name="more-vertical" size={18} color={colors.textColorPri} />}
+                    func={() => setShowSummaryFilter(true)}
+                  />
+                } 
+              />
               <Summary filter={summaryFilter} />
           </View>
           <View style={styles.cardSecWrapper}>
-              <Subtitle text={'Total Commissions'} />
-              <Commission/>
+              <Subtitle 
+                text={'Companywise Commissions'} 
+                subText={(companyCommissionFilterOptions.find(option => option.value === companyCommissionFilter)).label}
+                component={
+                  <MiniButton
+                    content={<Feather name="more-vertical" size={18} color={colors.textColorPri} />}
+                    func={() => setShowCompanyCommissionFilter(true)}
+                  />
+                } 
+              />
+              <CompanyCommission filter={companyCommissionFilter}/>
           </View>
         </ScrollView>
-        {showFilter && (
+        {showSummaryFilter && (
           <View style={styles.alertStyles}>
             <CustomModal
               title={'Select Filter'}
               content={
                   <Select
-                    options={[
-                      {label: 'Today', value: 'today'},
-                      {label: 'This Week', value: 'this_week'},
-                      {label: 'This Month', value: 'this_month'},
-                      {label: 'This Month First Half', value: 'this_month_first_half'},
-                      {label: 'This Month Second Half', value: 'this_month_second_half'},
-                    ]}
+                    options={summaryFilterOptions}
                     placeholder={'Select Filter'}
-                    onSelect={(text)=>handleFilter(text)}
+                    onSelect={(text)=>handleSummaryFilter(text)}
                   />
               }
               okButtonText={'Cancel'}
-              pressOk={()=>setShowFilter(false)}
+              pressOk={()=>setShowSummaryFilter(false)}
+            />
+          </View>
+        )}
+        {showCompanyCommissionFilter && (
+          <View style={styles.alertStyles}>
+            <CustomModal
+              title={'Select Filter'}
+              content={
+                  <Select
+                    options={companyCommissionFilterOptions}
+                    placeholder={'Select Filter'}
+                    onSelect={(text)=>handleCompanyCommissionFilter(text)}
+                  />
+              }
+              okButtonText={'Cancel'}
+              pressOk={()=>setShowCompanyCommissionFilter(false)}
             />
           </View>
         )}

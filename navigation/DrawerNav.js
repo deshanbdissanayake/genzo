@@ -20,6 +20,7 @@ import HomeNav from './HomeNav';
 import { useAppContext } from '../context/AppContext';
 import { logOut } from '../assets/data/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import MonthwiseCommission from '../screens/MonthwiseCommission';
 
 const Drawer = createDrawerNavigator();
 
@@ -116,6 +117,22 @@ const DraverNav = () => {
           drawerIcon: ({ focused, color, size }) => (
             <Ionicons
               name={focused ? 'home' : 'home-outline'}
+              size={size}
+              color={color}
+            />
+          ),
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="Monthly Commission"
+        component={MonthwiseCommission}
+        options={{
+          drawerLabel: 'Monthly Commission',
+          drawerLabelStyle: { fontFamily: 'ms-regular' },
+          drawerIcon: ({ focused, color, size }) => (
+            <Ionicons 
+              name={focused ? "calendar" : "calendar-outline" }
               size={size}
               color={color}
             />
