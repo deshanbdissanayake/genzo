@@ -1,11 +1,10 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../assets/colors/colors'
-import { Entypo, Feather } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import HomeHeader from '../components/app/HomeHeader';
 import Summary from '../components/app/Summary';
 import Subtitle from '../components/general/Subtitle';
-import Commission from '../components/app/Commission';
 import MiniButton from '../components/general/MiniButton';
 import Select from '../components/general/Select';
 import CustomModal from '../components/general/CustomModal';
@@ -33,7 +32,6 @@ const HomeScreen = () => {
 
   const [showSummaryFilter, setShowSummaryFilter] = useState(false);
   const [showCompanyCommissionFilter, setShowCompanyCommissionFilter] = useState(false);
-
   const handleSummaryFilter = (filter) => {
     setSummaryFilter(filter);
     setShowSummaryFilter(false);
@@ -46,8 +44,11 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-        <HomeHeader/>
-        <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+        <HomeHeader title={'Genzo Home'}/>
+        <ScrollView 
+          contentContainerStyle={styles.contentContainer} 
+          showsVerticalScrollIndicator={false}
+        >
           <View style={styles.cardSecWrapper}>
               <Subtitle 
                 text={'Summary'} 
@@ -62,7 +63,7 @@ const HomeScreen = () => {
               <Summary filter={summaryFilter} />
           </View>
           <View style={styles.cardSecWrapper}>
-              <ProductCount/>
+              <ProductCount />
           </View>
           <View style={styles.cardSecWrapper}>
               <Subtitle 
@@ -75,7 +76,7 @@ const HomeScreen = () => {
                   />
                 } 
               />
-              <CompanyCommission filter={companyCommissionFilter}/>
+              <CompanyCommission filter={companyCommissionFilter} />
           </View>
         </ScrollView>
         {showSummaryFilter && (

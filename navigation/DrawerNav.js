@@ -91,6 +91,10 @@ const CustomDrawerContent = ({ navigation, state, descriptors }) => {
             <Ionicons name="log-out-outline" size={size} color={colors.textColorSec} />
           )}
         />
+        <View style={styles.devInfoTextWrapper}>
+          <Text style={styles.devInfoTextStyles}>Developed by Introps IT</Text>
+          <Text style={styles.versionTextStyles}>V.1.0</Text>
+        </View>
       </View>
 
     </DrawerContentScrollView>
@@ -195,5 +199,23 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
+  },
+  devInfoTextWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: 'white',
+    paddingTop: 15,
+  },
+  devInfoTextStyles: {
+    fontFamily: 'ms-light',
+    fontSize: 10,
+    color: colors.textColorSec,
+  },
+  versionTextStyles: {
+    marginTop: 5,
+    fontFamily: 'ms-light',
+    fontSize: 8,
+    color: colors.textColorSec,
   },
 })

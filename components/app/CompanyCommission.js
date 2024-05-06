@@ -12,8 +12,6 @@ const CompanyCommissionCard = ({ cardData }) => {
         bgColor = '#fffbb0';
     }else if(cardData.level == 2){
         bgColor = '#f0f0f0';
-    }else if(cardData.level == 3){
-        bgColor = '#ffecdb';
     }
 
     return (
@@ -122,6 +120,9 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderTopColor: colors.textColorPri,
         width: '100%',
+    },
+    cardWrapper: {
+        
     },
     rowStyles: {
         flexDirection: 'row',

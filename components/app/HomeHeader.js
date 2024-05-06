@@ -6,7 +6,7 @@ import { DrawerActions } from '@react-navigation/native';
 
 import { colors } from '../../assets/colors/colors';
 
-const HomeHeader = () => {
+const HomeHeader = ({title = null}) => {
   const navigation = useNavigation();
 
   const openDrawer = () => {
@@ -28,7 +28,7 @@ const HomeHeader = () => {
           {/* Logo */}
           {/*<Image source={require('../../assets/images/app/logo.png')} style={styles.logo} />*/}
           {/* Name */}
-          <Text style={styles.name}>Genzo</Text>
+          <Text style={styles.name}>{title ? title : 'Genzo'}</Text>
         </View>
         <View style={styles.rightContainer}>
           {/* User icon */}
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   centerContainer: {
-    flex: 2,
+    flex: 8,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.textColorSec,
     fontFamily: 'ms-bold',
+    textAlign: 'center',
   },
   rightContainer: {
     flex: 1,

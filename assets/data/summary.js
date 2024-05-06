@@ -1,4 +1,5 @@
 const getSummaryByUserId = async () => {
+    let user_id = 1;
     //get user id from async storage
     let data = {
         today: {
