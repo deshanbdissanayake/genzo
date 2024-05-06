@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   headerTextStyles: {
-    fontSize: 24,
+    fontSize: 20,
     fontFamily: 'ms-semibold',
     color: colors.textColorPri,
   },

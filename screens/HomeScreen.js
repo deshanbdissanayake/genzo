@@ -10,6 +10,7 @@ import MiniButton from '../components/general/MiniButton';
 import Select from '../components/general/Select';
 import CustomModal from '../components/general/CustomModal';
 import CompanyCommission from '../components/app/CompanyCommission';
+import ProductCount from '../components/app/ProductCount';
 
 
 const HomeScreen = () => {
@@ -59,6 +60,9 @@ const HomeScreen = () => {
                 } 
               />
               <Summary filter={summaryFilter} />
+          </View>
+          <View style={styles.cardSecWrapper}>
+              <ProductCount/>
           </View>
           <View style={styles.cardSecWrapper}>
               <Subtitle 

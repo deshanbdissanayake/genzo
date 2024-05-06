@@ -9,13 +9,11 @@ const Commission = () => {
 
   const [loading, setLoading] = useState(true);
   const [comData, setComData] = useState(null);
-  const [prodCount, setProdCount] = useState(0);
 
   const getCom = async () => {
     try {
       let data = await getMonthlyCommissionByUserId();
       if(data){
-        setProdCount(data.productCount)
         if(data.commissions && data.commissions.length > 0){
           setComData(data.commissions)
         }
@@ -35,25 +33,8 @@ const Commission = () => {
     return <LoadingScreen/>
   }
 
-  let productCountPercentage = prodCount/1000*100;
-  let progressBarWidth = 0;
-  let borderRightStatus = false;
-  if(productCountPercentage >= 100){
-    progressBarWidth = 100;
-    borderRightStatus = true;
-  }else{
-    progressBarWidth = productCountPercentage;
-  }
-
   return (
     <View style={styles.container}>
-      <View style={styles.productCountWrapper}>
-        <Text style={styles.productCountTextStyles}>
-          {productCountPercentage >= 100 ? `Your product count is ${prodCount}!` : `You want to purchase ${1000-prodCount} more products to complete 1000.`}
-        </Text>
-        <View style={[styles.progressBarStyles, { width : `${progressBarWidth}%` }, borderRightStatus ? styles.progressRightRadius : null]}></View>
-      </View>
-
       <View style={styles.tableStyles}>
         {comData && comData.length > 0 ? 
           comData.map((val, index) => (
@@ -74,8 +55,6 @@ export default Commission
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   productCountWrapper: {
     marginBottom: 20,

@@ -21,6 +21,12 @@ const getMonthlyCommissionByUserId = async () => {
     return data;
 }
 
+const getProductCountByUserId = async () => {
+    let user_id = 1;
+    let data = 789;
+    return data;
+}
+
 const getCompanyWiseCommissionByUserId = async () => {
     let user_id = 1;
     let data = [
@@ -123,4 +129,4 @@ const getCompanyWiseCommissionByUserId = async () => {
     return data;
 }
 
-export { getMonthlyCommissionByUserId, getCompanyWiseCommissionByUserId }
+export { getMonthlyCommissionByUserId, getProductCountByUserId, getCompanyWiseCommissionByUserId }
