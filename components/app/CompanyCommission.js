@@ -9,7 +9,7 @@ const CompanyCommissionCard = ({ cardData }) => {
 
     let bgColor = colors.bgColor;
     if(cardData.level == 1){
-        bgColor = '#fffbb0';
+        bgColor = '#f5ffd4';
     }else if(cardData.level == 2){
         bgColor = '#f0f0f0';
     }
