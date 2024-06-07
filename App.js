@@ -37,7 +37,7 @@ const App = () => {
     'ms-bold': require('./assets/fonts/Montserrat-Bold.ttf'),
   }); 
 
-  if (fontsLoaded) {
+  if (!fontsLoaded) {
     return <SplashScreen/>
   }
 

@@ -1,45 +1,28 @@
-const getSummaryByUserId = async () => {
-    let user_id = 1;
-    //get user id from async storage
-    let data = {
-        today: {
-            total: { count: 22, value: '2200.00' },
-            pending: { count: 9, value: '2700.00' },
-            shipped: { count: 37, value: '2400.00' },
-            returned: { count: 5, value: '1700.00' },
-            delivered: { count: 14, value: '1900.00' }
-        },
-        this_week: {
-            total: { count: 52, value: '2100.00' },
-            pending: { count: 22, value: '2600.00' },
-            shipped: { count: 68, value: '2500.00' },
-            returned: { count: 11, value: '1600.00' },
-            delivered: { count: 33, value: '1800.00' }
-        },
-        this_month: {
-            total: { count: 115, value: '2300.00' },
-            pending: { count: 48, value: '2800.00' },
-            shipped: { count: 145, value: '2600.00' },
-            returned: { count: 18, value: '1800.00' },
-            delivered: { count: 72, value: '2000.00' }
-        },
-        this_month_first_half: {
-            total: { count: 62, value: '2200.00' },
-            pending: { count: 28, value: '2700.00' },
-            shipped: { count: 88, value: '2400.00' },
-            returned: { count: 13, value: '1700.00' },
-            delivered: { count: 37, value: '1900.00' }
-        },
-        this_month_second_half: {
-            total: { count: 48, value: '2150.00' },
-            pending: { count: 20, value: '2600.00' },
-            shipped: { count: 57, value: '2550.00' },
-            returned: { count: 7, value: '1750.00' },
-            delivered: { count: 35, value: '1950.00' }
-        }
-    };    
+import { getAllAsyncData } from "./async_storage";
 
-    return data;
+const getSummary = async () => {
+    try {
+        const x = await getAllAsyncData();
+        const response = await fetch(`https://go.genzo.lk/Api/get_summary?token=${x.token}`); 
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const responseData = await response.json();
+
+        // Ensure responseData matches the desired structure
+        let data = {
+            today: responseData.today,
+            this_week: responseData.this_week,
+            this_month: responseData.this_month,
+            this_month_first_half: responseData.this_month_first_half,
+            this_month_second_half: responseData.this_month_second_half
+        };
+
+        return data;
+    } catch (error) {
+        console.error('Error fetching summary by user ID:', error);
+        return null;
+    }
 }
 
-export { getSummaryByUserId }
+export { getSummary }

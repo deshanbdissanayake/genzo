@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -21,6 +21,7 @@ import { useAppContext } from '../context/AppContext';
 import { logOut } from '../assets/data/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MonthwiseCommission from '../screens/MonthwiseCommission';
+import { getAllAsyncData } from '../assets/data/async_storage';
 
 const Drawer = createDrawerNavigator();
 
@@ -28,7 +29,31 @@ const Drawer = createDrawerNavigator();
 const CustomDrawerContent = ({ navigation, state, descriptors }) => {
 
   const { setIsLoggedIn } = useAppContext();
+  const [fullName, setFullName] = useState('Guest');
+  const [contactNo, setContactNo] = useState('xxx');
+  const [companyName, setCompanyName] = useState('xxx');
 
+  useEffect(()=>{
+    getAsyncData();
+  },[])
+
+  const getAsyncData = async () => {
+    try {
+      let data = await getAllAsyncData();
+      
+      // Parse JSON strings
+      let userData = JSON.parse(data.userData);
+      let companyData = JSON.parse(data.companyData);
+      
+      setFullName(userData.full_name);
+      setContactNo(userData.contact_number);
+      setCompanyName(companyData.com_name);
+      
+    } catch (error) {
+      console.error('error DrawerNav.js -> getAsyncData: ', error);
+    }
+  };
+  
   const closeDrawer = () => {
     navigation.closeDrawer();
   };
@@ -67,8 +92,9 @@ const CustomDrawerContent = ({ navigation, state, descriptors }) => {
             <FontAwesome5 name="user" size={50} color={colors.textColorPri} />
           </View>
           <View style={styles.profileTextWrapper}>
-            <Text style={styles.profileText}>Hi Guest</Text>
-            <Text style={styles.profilePhone}>0711500200</Text>
+            <Text style={styles.profileText}>{fullName}</Text>
+            <Text style={styles.profilePhone}>{contactNo}</Text>
+            <Text style={styles.profilePhone}>{companyName}</Text>
           </View>
           <TouchableOpacity style={styles.drawerClose} onPress={closeDrawer} >
             <Ionicons name="close" size={24} color={colors.textColorSec} />

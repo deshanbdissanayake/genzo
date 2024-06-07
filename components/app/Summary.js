@@ -3,7 +3,7 @@ import React, { useCallback, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import LoadingScreen from '../../screens/LoadingScreen'
 import { colors } from '../../assets/colors/colors'
-import { getSummaryByUserId } from '../../assets/data/summary'
+import { getSummary } from '../../assets/data/summary'
 
 const ProvSumCard = ({name, count,  value, bgColor}) => {
     return (
@@ -24,7 +24,7 @@ const Summary = ({ filter }) => {
 
   const getData = async () => {
     try {
-      let res = await getSummaryByUserId();
+      let res = await getSummary();
       if(res){
         setSummaryData(res);
       }

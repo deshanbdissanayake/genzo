@@ -7,8 +7,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAppContext } from '../context/AppContext';
 import LoadingScreen from './LoadingScreen';
 import { colors } from '../assets/colors/colors';
+import { signIn } from '../assets/data/auth';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
 
     const { setIsLoggedIn } = useAppContext();
 
@@ -29,8 +30,21 @@ const LoginScreen = ({ navigation }) => {
         setLogInButtonLoading(true);
 
         if(userName == "" || password == ""){
-            Alert.alert('Error', 'Please enter Username and Password.')
+            Alert.alert('Error', 'Please enter Email and Password.')
             return;
+        }
+
+        try {
+            let res = await signIn(userName, password);
+            if(res.stt === 'success'){
+                setIsLoggedIn(true)
+            }else{
+                Alert.alert('Error', res.msg)
+            }
+        } catch (error) {
+            console.error('error at LoginScreeen->signin: ', error)
+        } finally {
+            setLogInButtonLoading(false);
         }
 
     };
@@ -61,6 +75,7 @@ const LoginScreen = ({ navigation }) => {
                                 placeholder="Enter Your Username"
                                 icon={<FontAwesome5 name="user" size={20} color={colors.textColorPri} />}
                                 editable={true}
+                                capitalize={'none'}
                             />
                         </View>
                         <View style={styles.inputStyle}>    
@@ -72,6 +87,7 @@ const LoginScreen = ({ navigation }) => {
                                 icon={<Feather name="lock" size={20} color={colors.textColorPri} />}
                                 secureTextEntry={secureTextEntry}
                                 editable={true}
+                                capitalize={'none'}
                             />
                             <Pressable 
                                 style={styles.viewPasswordStyle} 
