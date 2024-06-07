@@ -2,11 +2,11 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { colors } from '../../assets/colors/colors'
 
-const Subtitle = ({ text, subText = null, component = null}) => {
+const Subtitle = ({ text, subText = null, component = null, underline = false}) => {
   return (
     <View style={styles.subTitleWrapper}>
       <View style={styles.textWrapper} >
-        <Text style={styles.textStyles}>{text}</Text>
+        <Text style={[styles.textStyles, underline ? {textDecorationLine: 'underline'} : null]}>{text}</Text>
         {subText && (
           <Text style={styles.subTextStyles}>{subText}</Text>
         )}

@@ -14,13 +14,17 @@ const HomeHeader = ({title = null}) => {
     navigation.dispatch(DrawerActions.openDrawer());
   };
 
+  const handleProfile = () => {
+    navigation.navigate('Profile Screen')
+  }
+
   return (
     <View>
       <StatusBar backgroundColor={colors.bgColorSec} barStyle="light-content" />
       <View style={styles.headerContainer}>
         <View style={styles.leftContainer}>
           {/* Hamburger menu */}
-          <TouchableOpacity onPress={openDrawer}>
+          <TouchableOpacity onPress={openDrawer} style={{padding: 5}}>
             <Ionicons name="menu" size={24} color={colors.textColorSec} />
           </TouchableOpacity>
         </View>
@@ -32,7 +36,9 @@ const HomeHeader = ({title = null}) => {
         </View>
         <View style={styles.rightContainer}>
           {/* User icon */}
-          <Ionicons name="person" size={24} color={colors.textColorSec} />
+          <TouchableOpacity onPress={handleProfile} style={{padding: 5}}>
+            <Ionicons name="person" size={24} color={colors.textColorSec} />
+          </TouchableOpacity>
         </View>
       </View>
     </View>

@@ -4,11 +4,18 @@ import { useNavigation } from '@react-navigation/native'
 import Commission from '../components/app/Commission'
 import HomeHeader from '../components/app/HomeHeader'
 import { colors } from '../assets/colors/colors'
+import Header from '../components/general/Header'
 
 const MonthwiseCommission = () => {
+    const navigation = useNavigation();
+
+    const handleGoBack = () => {
+        navigation.goBack();
+    }
+
     return (
         <View style={styles.container}>
-            <HomeHeader title={'Monthly Commission'} />
+            <Header text={'Monthly Commission'} handleGoBack={handleGoBack} />
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                 <Commission/>
             </ScrollView>

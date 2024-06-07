@@ -22,6 +22,7 @@ import { logOut } from '../assets/data/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MonthwiseCommission from '../screens/MonthwiseCommission';
 import { getAllAsyncData } from '../assets/data/async_storage';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -170,6 +171,22 @@ const DraverNav = () => {
           headerShown: false,
         }}
       />
+      <Drawer.Screen
+        name="My Profile"
+        component={ProfileScreen}
+        options={{
+          drawerLabel: 'My Profile',
+          drawerLabelStyle: { fontFamily: 'ms-regular' },
+          drawerIcon: ({ focused, color, size }) => (
+            <Ionicons 
+              name={focused ? "person" : "person-outline" }
+              size={size}
+              color={color}
+            />
+          ),
+          headerShown: false,
+        }}
+      />
 
     </Drawer.Navigator>
   );
@@ -207,7 +224,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   profileTextWrapper:{
-    marginBottom: 5,
+    marginBottom: 10,
   },
   profileText:{
     fontFamily: 'ms-bold',
