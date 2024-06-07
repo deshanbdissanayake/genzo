@@ -28,10 +28,11 @@ export default MonthwiseCommission
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        padding: 15,
         backgroundColor: colors.bgColor,
     },
     contentContainer: {
         paddingVertical: 15,
-        paddingHorizontal: 15,
+        paddingHorizontal: 5,
     },
 })

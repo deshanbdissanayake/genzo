@@ -20,6 +20,8 @@ export const AppProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('error at AppContext.js->getData: ', error)
+    } finally {
+      setIsLoading(false);
     }
   }
 

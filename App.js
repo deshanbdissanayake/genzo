@@ -52,7 +52,11 @@ const App = () => {
 }
 
 const AppContent = () => {
-  const { isLoggedIn } = useAppContext();
+  const { isLoggedIn, isLoading } = useAppContext();
+
+  if(isLoading){
+    return <SplashScreen/>
+  }
 
   return (
     <SafeAreaView style={styles.container}>

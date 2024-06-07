@@ -1,4 +1,4 @@
-import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native'
+import { Image, RefreshControl, ScrollView, StyleSheet, View } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../assets/colors/colors'
 import { Feather } from '@expo/vector-icons';
@@ -50,6 +50,9 @@ const HomeScreen = () => {
           contentContainerStyle={styles.contentContainer} 
           showsVerticalScrollIndicator={false}
         >
+          <View style={styles.bannerWrapper}>
+            <Image source={{uri: 'https://go.genzo.lk/banner.jpg'}} style={styles.bannerImageStyles} />
+          </View>
           <View style={styles.cardSecWrapper}>
               <Subtitle 
                 text={'Summary'} 
@@ -140,5 +143,15 @@ const styles = StyleSheet.create({
   },
   cardSecWrapper: {
     marginBottom: 15,
-  }
+  },
+  bannerWrapper: {
+    marginBottom: 15,
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  bannerImageStyles: {
+    width: '100%',
+    height: 180,
+    resizeMode: 'cover',
+  },
 })
